@@ -182,6 +182,7 @@ url = {
   'SON2'                                  'see http://www.kcl.ac.uk/depsta/biomedical/cfnr/lidierth.html, or contact Malcolm Lidierth'
   'SPECEST'                               'see http://www.fieldtriptoolbox.org'
   'SPIKE'                                 'see http://www.fieldtriptoolbox.org'
+  'SPIKEGLX'                              'see https://github.com/jenniferColonell/SpikeGLX_Datafile_Tools'
   'SPLINES'                               'see http://www.mathworks.com/products/splines'
   'SPM'                                   'see http://www.fil.ion.ucl.ac.uk/spm'
   'SPM12'                                 'see http://www.fil.ion.ucl.ac.uk/spm'
@@ -455,6 +456,8 @@ switch toolbox
     dependency = {'spm_opm_vslm'};
   case 'READ_MED'
     dependency = {'read_MED', 'plot_MED'};
+  case 'SKIPEGLX'
+    dependency = {'SGLX_readMeta'};    
 
     % the following are FieldTrip modules or toolboxes
   case 'FILEIO'
@@ -549,9 +552,9 @@ if ~status && autoadd>0
     % the toolbox is not on the path and cannot be added
     sel = find(strcmp(url(:,1), toolbox));
     if ~isempty(sel)
-      msg = sprintf('the %s toolbox is not installed, %s', toolbox, url{sel, 2});
+      msg = sprintf('the %s toolbox is not available, %s', toolbox, url{sel, 2});
     else
-      msg = sprintf('the %s toolbox is not installed', toolbox);
+      msg = sprintf('the %s toolbox is not available', toolbox);
     end
     if autoadd==1
       error(msg);
@@ -566,9 +569,9 @@ elseif ~status && autoadd<0
   % the toolbox is not on the path and should not be added
   sel = find(strcmp(url(:,1), toolbox));
   if ~isempty(sel)
-    msg = sprintf('the %s toolbox is not installed, %s', toolbox, url{sel, 2});
+    msg = sprintf('the %s toolbox is not available, %s', toolbox, url{sel, 2});
   else
-    msg = sprintf('the %s toolbox is not installed', toolbox);
+    msg = sprintf('the %s toolbox is not available', toolbox);
   end
   error(msg);
 end
